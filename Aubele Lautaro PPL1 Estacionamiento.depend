@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1527128924 source:c:\users\laucha\desktop\aubele lautaro ppl1 estacionamiento\autos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"autos.h"
+	<time.h>
+
+1527122025 c:\users\laucha\desktop\aubele lautaro ppl1 estacionamiento\autos.h
+	"propietarios.h"
+
+1527124276 c:\users\laucha\desktop\aubele lautaro ppl1 estacionamiento\propietarios.h
+
+1527135657 source:c:\users\laucha\desktop\aubele lautaro ppl1 estacionamiento\propietarios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"propietarios.h"
+
+1527135673 source:c:\users\laucha\desktop\aubele lautaro ppl1 estacionamiento\main.c
+	<stdio.h>
+	<stdlib.h>
+	"autos.h"
+
+1527128926 source:c:\users\alumno\desktop\aubele lautaro ppl1 estacionamiento\autos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"autos.h"
+	<time.h>
+
+1527122026 c:\users\alumno\desktop\aubele lautaro ppl1 estacionamiento\autos.h
+	"propietarios.h"
+
+1527124278 c:\users\alumno\desktop\aubele lautaro ppl1 estacionamiento\propietarios.h
+
+1527135864 source:c:\users\alumno\desktop\aubele lautaro ppl1 estacionamiento\main.c
+	<stdio.h>
+	<stdlib.h>
+	"autos.h"
+
+1527164126 source:c:\users\alumno\desktop\aubele lautaro ppl1 estacionamiento\propietarios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"propietarios.h"
+
