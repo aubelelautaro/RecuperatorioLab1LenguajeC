@@ -38,4 +38,7 @@ int eAuto_buscarLugarLibre(eAuto listadoAutos[],int limite);
 int eAuto_siguienteId(eAuto listadoAutos[],int limite);
 int eAuto_buscarPorId(eAuto listadoAutos[],int limite,int id);
 
+void listarPropietariosNombreDescendente(eAuto listadoAutos[], int limiteAutos, ePropietario listadoPropietarios[], int limitePropietarios);
+void eAuto_estacionadosPorPatente(eAuto listadoAutos[], int limiteAutos, ePropietario listadoPropietarios[], int limitePropietarios);
+
 int devolverHorasEstadia();

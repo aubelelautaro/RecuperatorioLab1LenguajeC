@@ -86,23 +86,17 @@ void eAuto_ingreso(eAuto listadoAutos[],ePropietario listadoPropietarios[],int l
     {
         auxIdAuto = eAuto_siguienteId(listadoAutos,limiteAutos);
 
-        do
-        {
-            printf("\nIngrese marca del auto:");
-            scanf("%d",&listadoAutos[index].marca);
-        }while(listadoAutos[index].marca < 1 && listadoAutos[index].marca > 5);
+        printf("1.ALPHA_ROMEO - 2.FERRARI - 3.AUDI - 4.OTROS");
+        printf("\nIngrese id de la marca del auto:\n");
+        scanf("%d",&listadoAutos[index].marca);
 
-        do
-        {
-            printf("\nIngrese patente:");
-            fflush(stdin);
-            gets(listadoAutos[index].patente);
-        }while (!validarTarjeta(listadoAutos[index].patente));
+        printf("\nIngrese patente:");
+        fflush(stdin);
+        gets(listadoAutos[index].patente);
 
-
-            listadoAutos[index].idPropietario = auxIdPropietario;
-            listadoAutos[index].estado = OCUPADO;
-            listadoAutos[index].idAuto = auxIdAuto;
+        listadoAutos[index].idPropietario = auxIdPropietario;
+        listadoAutos[index].estado = OCUPADO;
+        listadoAutos[index].idAuto = auxIdAuto;
     }
 
     if(flag == 0)
@@ -439,7 +433,7 @@ void eAuto_estacionadosPorPatente(eAuto listadoAutos[],int limiteAutos, ePropiet
         strcpy(direccion[i], listadoPropietarios[indexProp].direccion);
         idProp=listadoPropietarios[indexProp].idPropietario;
 
-    if(listadoAutos[i].estado==OCUPADO)
+        if(listadoAutos[i].estado==OCUPADO)
         {
             if(listadoAutos[i].marca==1)
                     {
@@ -525,6 +519,91 @@ int eAuto_buscarPorId(eAuto listadoAutos[],int limite,int id)
         }
     }
     return retorno;
+}
+
+void listarPropietariosNombreDescendente(eAuto listadoAutos[], int limiteAutos, ePropietario listadoPropietarios[], int limitePropietarios)
+{
+    int i;
+    int j;
+    int ultimoOcupado;
+    int aux;
+    int indexAuto;
+    int idAuto;
+
+    char auxPatente[50];
+    char marca[20];
+    char auxNombre[20][100];
+
+    float importe;
+
+    ultimoOcupado=eAuto_buscarLugarLibre(listadoAutos,limiteAutos);
+
+    if(ultimoOcupado==-2)
+    {
+       ultimoOcupado=20;
+    }
+
+    for(i=0;i<ultimoOcupado-1;i++)
+    {
+        for(j=i+1;j<ultimoOcupado;j++)
+        {
+            if(stricmp(listadoPropietarios[i].nombreApellido,listadoPropietarios[j].nombreApellido)>0)
+            {
+                strcpy (auxNombre, listadoPropietarios[i].nombreApellido);
+                strcpy(listadoPropietarios[i].nombreApellido, listadoPropietarios[j].nombreApellido);
+                strcpy(listadoPropietarios[j].nombreApellido, auxNombre);
+
+                strcpy (aux, listadoPropietarios[i].direccion);
+                strcpy(listadoPropietarios[i].direccion, listadoPropietarios[j].direccion);
+                strcpy(listadoPropietarios[j].direccion, aux);
+
+                aux=listadoPropietarios[i].idPropietario;
+                listadoPropietarios[i].idPropietario=listadoPropietarios[j].idPropietario;
+                listadoPropietarios[j].idPropietario=aux;
+
+                aux=listadoPropietarios[i].edad;
+                listadoPropietarios[i].edad=listadoPropietarios[j].edad;
+                listadoPropietarios[j].edad=aux;
+
+                strcpy (aux, listadoPropietarios[i].tarjetaCredito);
+                strcpy(listadoPropietarios[i].tarjetaCredito, listadoPropietarios[j].tarjetaCredito);
+                strcpy(listadoPropietarios[j].tarjetaCredito, aux);
+            }
+        }
+    }
+    for(i=0;i<ultimoOcupado;i++)
+    {
+        indexAuto=eAuto_buscarPorId(listadoAutos,limiteAutos,listadoAutos[i].idPropietario);
+        strcpy(auxPatente[i], listadoAutos[indexAuto].patente);
+        idAuto=listadoAutos[indexAuto].idAuto;
+        importe=listadoAutos[indexAuto].importe;
+
+        if(listadoAutos[indexAuto].estado==OCUPADO)
+        {
+
+            if(listadoAutos[indexAuto].marca==1)
+                    {
+                        strcpy(marca,"ALPHA_ROMEO");
+                    }
+
+                if(listadoAutos[indexAuto].marca==2)
+                    {
+                        strcpy(marca,"FERRARI");
+                    }
+
+                if(listadoAutos[indexAuto].marca==3)
+                    {
+                        strcpy(marca,"AUDI");
+                    }
+
+                if(listadoAutos[indexAuto].marca==4)
+                    {
+                        strcpy(marca,"OTROS");
+                    }
+
+            printf("Nombre: %s Direccion: %s ID propietario: %d  Tarjeta: %s Marca: %s ID auto: %d Importe: %f\n",listadoPropietarios[i].nombreApellido, listadoPropietarios[i].direccion, listadoPropietarios[i].idPropietario, listadoPropietarios[i].tarjetaCredito, marca,idAuto,importe);
+        }
+    }
 }
 
 int devolverHorasEstadia()

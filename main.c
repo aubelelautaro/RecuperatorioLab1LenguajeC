@@ -33,7 +33,9 @@ int main()
         printf("10.Listado de autos estacionados con sus propietario, ordenados por patente\n");
         printf("11.Egresar autos (hardcode)\n");
         printf("12.Mostrar autos egresados(hardcode)\n");
-        printf("13.Salir\n");
+        printf("13.Listado de propietarios ordenados por nombre ascendente (no funciona todavia)\n");
+        printf("14.Mostrar quienes superan cierta edad\n");
+        printf("15.Salir\n");
 
         fflush(stdin);
         scanf("%d",&opcion);
@@ -75,7 +77,14 @@ int main()
                 break;
             case 12:
                 eAuto_mostrarEgresos(listaAutos,CANTCOCHES,listaProp,CANTPROP);
+                break;
             case 13:
+                listarPropietariosNombreDescendente(listaAutos,CANTCOCHES,listaProp,CANTPROP);
+                break;
+            case 14:
+                mostrarUsuariosCiertaEdad(listaProp,CANTPROP);
+                break;
+            case 15:
                 seguir = 'n';
                 break;
             default:

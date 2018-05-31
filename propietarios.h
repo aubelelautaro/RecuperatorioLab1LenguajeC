@@ -4,6 +4,7 @@
 typedef struct
 {
     int idPropietario;
+    int edad;
     char nombreApellido[100];
     char direccion[100];
     char tarjetaCredito[20];
@@ -28,6 +29,8 @@ void ePropietario_modificacion(ePropietario[],int);
 
 void ePropietario_mostrarUno(ePropietario parametro);
 void ePropietario_mostrarListado(ePropietario[],int limite);
+
+void mostrarUsuariosCiertaEdad(ePropietario[],int);
 
 int ePropietario_buscarLugarLibre(ePropietario[],int);
 int ePropietario_siguienteId(ePropietario[],int);

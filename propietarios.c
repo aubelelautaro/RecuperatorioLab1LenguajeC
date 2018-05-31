@@ -76,6 +76,7 @@ void ePropietario_init(ePropietario listadoPropietarios[],int limite)
     {
         listadoPropietarios[i].estado= LIBRE;
         listadoPropietarios[i].idPropietario= 0;
+        listadoPropietarios[i].edad = 0;
         strcpy(listadoPropietarios[i].tarjetaCredito,"");
         strcpy(listadoPropietarios[i].nombreApellido,"");
         strcpy(listadoPropietarios[i].direccion,"");
@@ -126,10 +127,11 @@ int ePropietario_alta(ePropietario  listadoPropietarios[],int limite)
 {
     int retorno = -1;
     int id;
+    int edad;
     int indice;
-    int validar;
+    int validarN;
+    int validarE;
     char nombre[100];
-
 
     if(limite > 0 && listadoPropietarios != NULL)
     {
@@ -147,12 +149,16 @@ int ePropietario_alta(ePropietario  listadoPropietarios[],int limite)
                 fflush(stdin);
                 gets(listadoPropietarios[indice].nombreApellido);
                 strcpy(nombre,listadoPropietarios[indice].nombreApellido);
-                validar = validarNombre(nombre);
-                if(validar==0)
+                validarN = validarNombre(nombre);
+                if(validarN==0)
                 {
                     printf("Ingrese solo letras\n");
                 }
-            }while(validar==0);
+            }while(validarN==0);
+
+            printf("Ingrese edad: ");
+            fflush(stdin);
+            scanf("%d",&edad);
 
             printf("Ingrese direccion: ");
             fflush(stdin);
@@ -166,6 +172,7 @@ int ePropietario_alta(ePropietario  listadoPropietarios[],int limite)
             }while(!validarTarjeta(listadoPropietarios[indice].tarjetaCredito));
 
             retorno = 0;
+            listadoPropietarios[indice].edad = edad;
             listadoPropietarios[indice].idPropietario = id;
             listadoPropietarios[indice].estado = OCUPADO;
         }
@@ -257,6 +264,22 @@ void ePropietario_modificacion(ePropietario listadoPropietarios[] ,int limite)
     }
 }
 
+void mostrarUsuariosCiertaEdad(ePropietario listadoPropietarios[],int limite)
+{
+    int edad;
+    int i;
+
+    printf("Ingrese edad a mostrar usuarios: ");
+    scanf("%d",&edad);
+    for(i=0;i<limite;i++)
+    {
+        if (listadoPropietarios[i].edad >= edad)
+        {
+            ePropietario_mostrarUno(listadoPropietarios[i]);
+        }
+    }
+}
+
 //Muestra los propietarios pidiendo el id del propietario a dar de baja
 void ePropietario_baja(ePropietario listadoPropietarios[] ,int limite)
 {
@@ -290,6 +313,7 @@ void ePropietario_baja(ePropietario listadoPropietarios[] ,int limite)
 
             listadoPropietarios[indexProp].estado = BORRADO;
             listadoPropietarios[indexProp].idPropietario = 0;
+            listadoPropietarios[indexProp].edad = 0;
             strcpy(listadoPropietarios[indexProp].tarjetaCredito,"");
             strcpy(listadoPropietarios[indexProp].nombreApellido, "");
             strcpy(listadoPropietarios[indexProp].direccion, "");
@@ -309,7 +333,7 @@ void ePropietario_baja(ePropietario listadoPropietarios[] ,int limite)
 //Muestra un propietario
 void ePropietario_mostrarUno(ePropietario parametro)
 {
-     printf("\nID: %d - Nombre : %s - Direccion: %s - Tarjeta: %s \n",parametro.idPropietario,parametro.nombreApellido,parametro.direccion,parametro.tarjetaCredito);
+     printf("\nID: %d - Nombre : %s - Edad: %d - Direccion: %s - Tarjeta: %s \n",parametro.idPropietario,parametro.nombreApellido,parametro.edad,parametro.direccion,parametro.tarjetaCredito);
 }
 
 //Muestra el listado de los usuarios
